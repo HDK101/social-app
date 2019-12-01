@@ -11,27 +11,42 @@
 <body>
     <?php
 
+    //Verifica se existe um parâmetro "page" no GET, "home" é a página principal
+    $page = isset($_GET["page"]) ? $page = $_GET["page"] : "home";
+    //Verifica se existe um parâmetro "logout" no GET, finalidade de deslogar o usuário ao apertar o Logout
+    $logout = isset($_GET["logout"]) ? $_GET["logout"] : "";
+    //Verifica se existe um parâmetro "login" no GET, finalidade de manter o usuário logado
+    $login_cookie = isset($_COOKIE["login"]) & empty($logout) ? $_COOKIE["login"] : "";
+
+    //Desloga o usuário
+    if (!empty($logout)) {
+        setcookie("login", "", time() - 3600);
+        $login_cookie = "";
+        header("Location: /web/");
+    }
+    
     include "header.php";
 
-    $page = "home";
-
-    if (isset($_GET["page"])) {
-        $page = $_GET["page"];
-    }
-
-    switch ($page) {
-        case "home":
-            include "home.php";
-            break;
-        case "login":
-            include "login.php";
-            break;
-        case "register":
-            include "register.php";
-            break;
-        default:
-            echo "Page not found!";
-            break;
+    if (empty($login_cookie)) {
+        switch ($page) {
+            case "home":
+                include "home.php";
+                break;
+            case "login":
+                include "login.php";
+                break;
+            case "register":
+                include "register.php";
+                break;
+            default:
+                echo "Page not found!";
+                break;
+        }
+    } else {
+        //Conecta o usuário se estiver com o cookie
+        if (!empty($login_cookie)) {
+            include "dashboard.php";
+        }
     }
 
     include "footer.php";

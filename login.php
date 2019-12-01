@@ -3,7 +3,7 @@
         <div class="login-content">
             <br>
             <br>
-            <form action="/web/placeholder" method="post">
+            <form action="/web/enter.php" method="post">
                 <h1 style="margin-bottom: 30px" class="center lead-big">Login</h1>
                 <label class="label center">User:</label>
                 <input class="center input-text-style" type="text" name="user">

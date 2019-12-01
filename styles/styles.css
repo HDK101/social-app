@@ -157,6 +157,17 @@ Classes
 
 /*Text styles*/
 
+.link-header
+{
+    text-decoration: none;
+    color: white;
+    margin: 0px 5px 0px 5px;
+}
+.link-header:hover
+{
+    color: rgb(170, 170, 170);
+}
+
 .text-shadow
 {
    text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.082);   
