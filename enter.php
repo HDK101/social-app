@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 $user = $_POST["user"];
 $pass = md5($_POST["pass"]);
 
@@ -12,9 +14,14 @@ if (isset($user)) {
     $select = mysqli_query($connect, $query_select);
 
     if (mysqli_num_rows($select) > 0) {
-        setcookie("login",$user,time() + 1800);
+        setcookie("login", "true");
+        $_SESSION["login"] = $user;
+        $_SESSION["pass"] = $pass;
         header("Location: /web/");
     } else {
-        echo "Senha inválida ou usuário inexistente!";
+        unset($_SESSION["login"]);
+        unset($_SESSION["pass"]);
+        setcookie("error", "wrongcredentials");
+        header("Location: /web/?page=login");
     }
 }

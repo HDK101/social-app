@@ -1,3 +1,9 @@
+<?php
+
+session_start();
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -10,23 +16,27 @@
 
 <body>
     <?php
-
-    //Verifica se existe um parâmetro "page" no GET, "home" é a página principal
-    $page = isset($_GET["page"]) ? $page = $_GET["page"] : "home";
+    include "modules/pageget.php";
     //Verifica se existe um parâmetro "logout" no GET, finalidade de deslogar o usuário ao apertar o Logout
     $logout = isset($_GET["logout"]) ? $_GET["logout"] : "";
     //Verifica se existe um parâmetro "login" no GET, finalidade de manter o usuário logado
     $login_cookie = isset($_COOKIE["login"]) & empty($logout) ? $_COOKIE["login"] : "";
 
+
+
     //Desloga o usuário
     if (!empty($logout)) {
         setcookie("login", "", time() - 3600);
         $login_cookie = "";
+        unset($_SESSION["login"]);
+        unset($_SESSION["pass"]);
+        session_destroy();
         header("Location: /web/");
     }
-    
+
     include "header.php";
 
+    //Verifica a sessão
     if (empty($login_cookie)) {
         switch ($page) {
             case "home":
@@ -45,7 +55,16 @@
     } else {
         //Conecta o usuário se estiver com o cookie
         if (!empty($login_cookie)) {
-            include "dashboard.php";
+            if (empty($logout)) {
+                include "dashboard.php";
+            } else {
+                setcookie("login", "", time() - 3600);
+                $login_cookie = "";
+                unset($_SESSION["login"]);
+                unset($_SESSION["pass"]);
+                session_destroy();
+                header("Location: /web/");
+            }
         }
     }
 

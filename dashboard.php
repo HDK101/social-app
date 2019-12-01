@@ -5,7 +5,7 @@
                 <img src="img/profilepic.png" alt="Profile" class="img-auto-height img-fly-animation">
             </div>
             <div style="width: 65%; float:right;">
-                <h1 class="lead-big center"><em style="color:rgb(48, 48, 48);">Welcome, </em><?php echo $_COOKIE["login"] ?></h1>
+                <h1 class="lead-big center"><em style="color:rgb(48, 48, 48);">Welcome</h1>
             </div>
         </div>
         <div style="height: 50%; background-color: rgba(0.5,0.5,0.5,0.2)">

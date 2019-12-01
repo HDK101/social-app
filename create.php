@@ -25,15 +25,18 @@ $emailarray = $email_array['email'];
 if (check_credential($user, CredentialType::USER) || check_credential($password, CredentialType::PASS) || check_credential($email, CredentialType::EMAIL)) {
     echo "Insira dados válidos.";
 } else {
+    //Verifica se o email ou o nome do usuario estão sendo usados
     if ($logarray == $user || $emailarray == $email) {
-
-        header("Location: /web/?page=register&error=alreadyexists");
+        setcookie("error","alreadyexists");
+        header("Location: /web/?page=register");
     } else {
         $query = "INSERT into usuarios(login,senha,email) VALUES ('$user','$password','$email')";
         $insert = @mysqli_query($connect, $query) or die("Não foi possível executar no banco de dados!");
 
         if ($insert) {
-            setcookie("login", $user,time() + 1800);
+            setcookie("login", "true");
+            $_SESSION["login"] = $user;
+            $_SESSION["pass"] = $pass;
             header("Location: /web/");
         } else {
             echo "Não foi possível cadastrar.";

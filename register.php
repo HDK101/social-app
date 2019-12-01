@@ -16,27 +16,12 @@
                 <div class="center"><a class="lead" href="?page=login">Already registered?</a></div>
                 <br>
                 <?php
-                $error = isset($_GET["error"]) ? $_GET["error"] : "";
-                $text_error = "";
-                if (!empty($error)) {
-                    switch ($error) {
-                        case "alreadyexists":
-                            $text_error = "Account already exists.";
-                            break;
-                        case "invalidpassword":
-                            $text_error = "Password must be higher than 10 characters.";
-                            break;
-                        case "invaliduser":
-                            $text_error = "User must be higher than 5 characters.";
-                            break;
-                        case "invalidemail":
-                            $text_error = "Email is required.";
-                            break;
-                    }
+                include "modules/errorhandling.php";
+                if (!empty($text_error)) {
                     echo '<p class = "center" style="color: red">' . $text_error . '</p>';
                 }
                 ?>
-                    <input style="margin-top: 20px; margin-bottom: 20px" class="center button-styles orange" value="Register" type="submit">
+                <input style="margin-top: 20px; margin-bottom: 20px" class="center button-styles orange" value="Register" type="submit">
             </form>
         </div>
     </div>

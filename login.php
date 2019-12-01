@@ -11,8 +11,13 @@
                 <label class="label center">Pass:</label>
                 <input class="center input-text-style" type="password" name="pass">
                 <div class="center"><a class="lead" href="?page=forgot">Forgot password?</a></div>
-                <br>
-                <input style="margin-top: 20px; margin-bottom: 20px" class="center button-styles orange" value="Login" type="submit"> 
+                <?php 
+                include "modules/errorhandling.php";
+                if (!empty($text_error)) {
+                    echo '<p class = "center" style="color: red">' . $text_error . '</p>';
+                }
+                ?>
+                <input style="margin-top: 20px; margin-bottom: 20px" class="center button-styles orange" value="Login" type="submit">
                 <br>
                 <br>
                 <br>
