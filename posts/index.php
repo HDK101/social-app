@@ -18,6 +18,10 @@ session_start();
 
     $login_cookie = isset($_COOKIE["login"]) ? $_COOKIE["login"] : "";
 
+    $page = isset($_GET['page']) ? $_GET['page'] : '';
+
+    //$post_id = isset($_GET['id']) ? $_GET['id'] : '';
+
     /*Verifica se o usuário está logado, área restrista para não-logados*/
     if (!empty($login_cookie)) {
         if (!isset($_SESSION["login"]) & !isset($_SESSION["pass"])) {
@@ -32,6 +36,9 @@ session_start();
     switch ($page) {
         case "home":
             include "allposts.php";
+            break;
+        case "post":
+            include "seepost.php";
             break;
     }
 

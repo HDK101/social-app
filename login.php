@@ -5,17 +5,14 @@
             <br>
             <form action="/web/enter.php" method="post">
                 <h1 style="margin-bottom: 30px" class="center lead-big">Login</h1>
-                <label class="label center">User:</label>
-                <input class="center input-text-style" type="text" name="user">
+                <label class="label center">Email:</label>
+                <input class="center input-text-style" type="email" name="email">
                 <br>
                 <label class="label center">Pass:</label>
                 <input class="center input-text-style" type="password" name="pass">
                 <div class="center"><a class="lead" href="?page=forgot">Forgot password?</a></div>
                 <?php 
                 include "modules/errorhandling.php";
-                if (!empty($text_error)) {
-                    echo '<p class = "center" style="color: red">' . $text_error . '</p>';
-                }
                 ?>
                 <input style="margin-top: 20px; margin-bottom: 20px" class="center button-styles orange" value="Login" type="submit">
                 <br>

@@ -175,17 +175,17 @@ Classes
 
 .lead-small {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-size: 3vw;
+    font-size: 2vh;
 }
 
 .lead-medium {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-size: 2vw;
+    font-size: 3vh;
 }
 
 .lead-big {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-size: 3vw;
+    font-size: 4vh;
 }
 
 .label{
