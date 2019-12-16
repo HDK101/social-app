@@ -13,7 +13,7 @@
         </form>
     </div>
     <?php
-    $connect = @mysqli_connect("localhost", "root", "shambler_faust_10", "socialapp") or die("Não foi possível conectar ao banco de dados");
+    $connect = @mysqli_connect("localhost", "root", "", "socialapp") or die("Não foi possível conectar ao banco de dados");
     @mysqli_select_db($connect, "socialapp") or die("Não foi possível selecionar o banco de dados");
 
     $query = "SELECT * FROM posts ORDER BY reg_date ASC LIMIT 0,10";

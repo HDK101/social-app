@@ -5,7 +5,7 @@ session_start();
 $user = $_POST["email"];
 $pass = md5($_POST["pass"]);
 
-$connect = @mysqli_connect("localhost", "root", "shambler_faust_10", "socialapp") or die("Não foi possível conectar ao banco de dados!");
+$connect = @mysqli_connect("localhost", "root", "", "socialapp") or die("Não foi possível conectar ao banco de dados!");
 @mysqli_select_db($connect, "socialapp") or die("Não foi possível selecionar o banco de dados!");
 
 if (isset($user)) {

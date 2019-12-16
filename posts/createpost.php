@@ -5,7 +5,7 @@ $title = isset($_POST['title']) ? $_POST['title'] : '';
 $content = isset($_POST['content']) ? $_POST['content'] : '';
 $session_login = isset($_SESSION['login']) ? $_SESSION['login'] : '';
 
-$connect = @mysqli_connect("localhost", "root", "shambler_faust_10", "socialapp") or die("Não foi possível conectar ao banco de dados!");
+$connect = @mysqli_connect("localhost", "root", "", "socialapp") or die("Não foi possível conectar ao banco de dados!");
 @mysqli_select_db($connect, "socialapp") or die("Não foi possível selecionar o banco de dados!");
 
 /*Busca o ID do usuário logado no banco de dados*/
