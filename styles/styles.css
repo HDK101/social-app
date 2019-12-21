@@ -167,6 +167,17 @@ Classes
 {
     color: rgb(170, 170, 170);
 }
+.a
+{
+    color: white;
+    text-decoration: none;
+}
+.a--color-gray
+{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 3vh;
+    color: rgb(80, 80, 80)
+}
 
 .text-shadow
 {
