@@ -13,15 +13,28 @@
         </form>
     </div>
     <?php
-    $current_list = isset($_GET["list"]) ? is_numeric($_GET["list"]) ? $_GET["list"] : 0 : 0;
-    $next_elements = $current_list + 10;
-    $previous_elements = $current_list - 10 >= 0 ? $current_list - 10 : 0;
-
     $connect = @mysqli_connect("localhost", "root", "", "socialapp") or die("Não foi possível conectar ao banco de dados");
     @mysqli_select_db($connect, "socialapp") or die("Não foi possível selecionar o banco de dados");
+    
+    /*Pega o número de posts disponíveis*/
+    $count_query = "SELECT COUNT(*) FROM posts";
+    $count_select = mysqli_query($connect,$count_query);
+    $count = (int)mysqli_fetch_row($count_select)[0];
 
-    $query = "SELECT * FROM posts ORDER BY reg_date ASC LIMIT {$current_list},{$next_elements}";
+    /*Lista atual(10 posts)*/
+    $current_list = isset($_GET["list"]) ? is_numeric($_GET["list"]) ? $_GET["list"] : 0 : 0;
+    /*Lista máxima(10 posts próximos)*/
+    $max_elements = $current_list + 10;
+    /*Número dos próximos elementos, é zero se a quantidade de posts for menor do que 10*/
+    $next_elements = $count >= 10 ? $current_list + 10 : 0;
+    /*Lista anterior(10 posts anteriores)*/
+    $previous_elements = $current_list - 10 >= 0 ? $current_list - 10 : 0;
+
+    /*Query dos posts*/
+    $query = "SELECT * FROM posts ORDER BY reg_date ASC LIMIT {$current_list},{$max_elements}";
     $select = mysqli_query($connect, $query);
+
+    /*Mostra os posts*/
     while ($row = mysqli_fetch_assoc($select)) {
         echo "<div class='content-whitebox' style='min-height: 250px; max-width: 720px; margin: 0px auto 50px auto'>
         <div style='float: left; padding: 10px'>
