@@ -24,9 +24,14 @@
     $select = mysqli_query($connect, $query);
     while ($row = mysqli_fetch_assoc($select)) {
         echo "<div class='content-whitebox' style='min-height: 250px; max-width: 720px; margin: 0px auto 50px auto'>
-     <h1 class='lead-big center'>{$row["title"]}</h1>
-     <p class='center'>{$row["content"]}</p>
- </div>";
+        <div style='float: left; padding: 10px'>
+            <a href='/web/?user={$row["userid"]}'><img src='../img/profilepic.png' alt='Profile' class='img img--profile-small img-fly-animation'></a>
+        </div>
+        <div style='width: 65%; float: right;'>
+            <h1 class='lead-big center'>{$row["title"]}</h1>
+            <p class='center'>{$row["content"]}</p>
+        </div>
+    </div>";
     }
     ?>
     <div class="content-whitebox" style="height: 60px; max-width: 220px;">
