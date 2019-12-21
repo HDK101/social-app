@@ -13,10 +13,14 @@
         </form>
     </div>
     <?php
+    $current_list = isset($_GET["list"]) ? is_numeric($_GET["list"]) ? $_GET["list"] : 0 : 0;
+    $next_elements = $current_list + 10;
+    $previous_elements = $current_list - 10 >= 0 ? $current_list - 10 : 0;
+
     $connect = @mysqli_connect("localhost", "root", "", "socialapp") or die("Não foi possível conectar ao banco de dados");
     @mysqli_select_db($connect, "socialapp") or die("Não foi possível selecionar o banco de dados");
 
-    $query = "SELECT * FROM posts ORDER BY reg_date ASC LIMIT 0,10";
+    $query = "SELECT * FROM posts ORDER BY reg_date ASC LIMIT {$current_list},{$next_elements}";
     $select = mysqli_query($connect, $query);
     while ($row = mysqli_fetch_assoc($select)) {
         echo "<div class='content-whitebox' style='min-height: 250px; max-width: 720px; margin: 0px auto 50px auto'>
@@ -25,4 +29,21 @@
  </div>";
     }
     ?>
+    <div class="content-whitebox" style="height: 60px; max-width: 220px;">
+        <div style="width: 80px; float:right; padding: 15px">
+            <div class="center">
+                <?php
+                echo "<a class='a a--color-gray' href='/web/posts/?list={$next_elements}'>Next</a>"
+                ?>
+            </div>
+        </div>
+        <div style="width: 80px; float:left; padding: 15px">
+            <div class="center">
+                <?php
+                echo "<a class='a a--color-gray' href='/web/posts/?list={$previous_elements}'>Previous</a>"
+                ?>
+            </div>
+        </div>
+        <span style="clear: both;"></span>
+    </div>
 </div>
